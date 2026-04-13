@@ -3,437 +3,481 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>s4nch0 // Brick by Brick</title>
+  <title>Brick by Brick — s4nch0</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,600;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg:        #13151a;
-      --surface:   #1a1d24;
-      --surface2:  #1f2330;
-      --border:    #272b38;
-      --accent:    #7c9ef8;
-      --accent-dim:#3a4a7a;
-      --green:     #5cb87a;
-      --red:       #e06c6c;
-      --yellow:    #d4a853;
-      --text:      #b8c0cc;
-      --text-hi:   #e2e6ed;
-      --muted:     #4a5168;
-      --code-bg:   #0e1016;
+      --bg:      #111214;
+      --surface: #18191d;
+      --border:  #24262c;
+      --text:    #c9cdd6;
+      --dim:     #5a5f6e;
+      --hi:      #e8eaf0;
+      --accent:  #5b8dd9;
+      --green:   #4a9e6b;
+      --yellow:  #b89a4a;
+      --red:     #b85a5a;
+      --mono:    'IBM Plex Mono', monospace;
+      --sans:    'IBM Plex Sans', sans-serif;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13.5px;
-      line-height: 1.85;
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.8;
       min-height: 100vh;
     }
 
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
     /* ── HEADER ── */
     header {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(19,21,26,0.94);
-      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--border);
-      padding: 0 2.5rem;
-      display: flex; align-items: center; justify-content: space-between;
-      height: 52px;
+      padding: 0 2rem;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800; font-size: 1rem;
-      color: var(--text-hi);
+      font-family: var(--mono);
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--hi);
       text-decoration: none;
-      letter-spacing: 0.02em;
     }
-    .logo span { color: var(--accent); }
 
-    nav { display: flex; gap: 2rem; }
-    nav a {
-      color: var(--muted); text-decoration: none;
-      font-size: 12px; letter-spacing: 0.06em;
-      transition: color 0.2s;
+    .logo .at { color: var(--accent); }
+
+    nav {
+      display: flex;
+      gap: 1.8rem;
+      align-items: center;
     }
-    nav a:hover { color: var(--text-hi); }
+
+    nav a {
+      font-size: 12px;
+      color: var(--dim);
+      transition: color 0.15s;
+    }
+
+    nav a:hover {
+      color: var(--hi);
+      text-decoration: none;
+    }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem 6rem;
+      animation: fadeUp 0.35s ease both;
+    }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+      font-size: 11px;
+      color: var(--dim);
+      margin-bottom: 1.5rem;
+    }
+
+    .breadcrumb a {
+      color: var(--dim);
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover { color: var(--text); }
+    .breadcrumb .sep { margin: 0 0.4rem; }
 
     /* ── HERO ── */
-    .hero {
-      max-width: 820px; margin: 0 auto;
-      padding: 4.5rem 2.5rem 2.5rem;
-      animation: fadeUp 0.45s ease both;
-    }
-
-    .breadcrumb {
-      font-size: 11px; letter-spacing: 0.12em;
-      color: var(--muted); margin-bottom: 1.2rem;
-    }
-    .breadcrumb span { color: var(--accent); }
+    .hero { margin-bottom: 2.5rem; }
 
     h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 800; color: var(--text-hi);
-      line-height: 1.1; margin-bottom: 1.4rem;
+      font-family: var(--sans);
+      font-size: 1.7rem;
+      font-weight: 600;
+      color: var(--hi);
       letter-spacing: -0.02em;
+      margin-bottom: 0.8rem;
     }
 
-    .meta-row {
-      display: flex; flex-wrap: wrap; gap: 0.5rem 1rem;
-      align-items: center; margin-bottom: 2.5rem;
+    .meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
-    .badge {
-      font-size: 10px; letter-spacing: 0.1em;
-      padding: 2px 8px; border-radius: 3px; border: 1px solid;
-    }
-    .badge.web    { border-color: var(--accent); color: var(--accent); }
-    .badge.easy   { border-color: var(--green);  color: var(--green);  }
-    .badge.pts    { border-color: var(--border);  color: var(--muted);  }
-    .meta-sep     { color: var(--border); }
-
-    /* ── LAYOUT ── */
-    .container {
-      max-width: 820px; margin: 0 auto;
-      padding: 0 2.5rem 6rem;
+    .tag {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      padding: 1px 6px;
+      border-radius: 2px;
+      border: 1px solid;
+      text-transform: uppercase;
     }
 
-    .divider {
-      border: none; border-top: 1px solid var(--border);
-      margin: 2.5rem 0;
+    .tag-web    { border-color: #2a3d5e; color: var(--accent); }
+    .tag-easy   { border-color: var(--border); color: var(--dim); }
+    .tag-pts    { border-color: var(--border); color: var(--dim); }
+
+    .meta-sep { color: var(--border); }
+
+    .ctf-name {
+      font-size: 11px;
+      color: var(--dim);
     }
 
-    /* ── TYPOGRAPHY ── */
+    /* ── DIVIDER ── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    /* ── CONTENT ── */
+    .content p {
+      margin-bottom: 0.9rem;
+      color: var(--text);
+    }
+
     h2 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.15rem; font-weight: 700;
-      color: var(--text-hi);
-      margin: 2.8rem 0 0.9rem;
-      display: flex; align-items: center; gap: 0.7rem;
-    }
-    h2 .step-circle {
-      width: 26px; height: 26px; border-radius: 50%;
-      background: var(--surface2); border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 10px; color: var(--accent); flex-shrink: 0;
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--hi);
+      margin: 2.2rem 0 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    p { margin-bottom: 0.9rem; }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    strong { color: var(--text-hi); font-weight: 600; }
+    h2 .num {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      background: #1a2540;
+      border: 1px solid #2a3d5e;
+      border-radius: 2px;
+      padding: 0 5px;
+      font-weight: 400;
+    }
+
+    h3 {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      margin: 1.4rem 0 0.5rem;
+    }
 
     /* ── CODE ── */
     code {
-      font-family: 'JetBrains Mono', monospace;
-      background: var(--code-bg); color: var(--yellow);
-      padding: 1px 5px; border-radius: 3px;
-      font-size: 12.5px; border: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 12px;
+      background: var(--surface);
+      color: var(--yellow);
+      padding: 1px 5px;
+      border-radius: 2px;
+      border: 1px solid var(--border);
     }
 
     pre {
-      background: var(--code-bg);
+      background: #0d0e10;
       border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 1.1rem 1.3rem;
+      border-left: 2px solid var(--accent);
+      border-radius: 3px;
+      padding: 1rem 1.1rem;
       overflow-x: auto;
-      margin: 1.1rem 0;
-      position: relative;
+      margin: 0.9rem 0;
+      font-size: 12.5px;
+      line-height: 1.7;
     }
-    pre .lang-label {
-      position: absolute; top: 7px; right: 10px;
-      font-size: 10px; letter-spacing: 0.12em;
-      color: var(--muted); text-transform: uppercase;
-    }
+
     pre code {
-      background: none; border: none; padding: 0;
-      color: var(--text); font-size: 12.5px; line-height: 1.75;
+      background: none;
+      border: none;
+      padding: 0;
+      color: var(--text);
+      font-size: 12.5px;
     }
-    .hl-key  { color: var(--accent); }
-    .hl-val  { color: var(--yellow); }
-    .hl-cmt  { color: var(--muted); font-style: italic; }
-    .hl-path { color: var(--green); }
-    .hl-warn { color: var(--red); }
 
-    /* ── CALLOUTS ── */
-    .callout {
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 0.9rem 1.1rem;
-      margin: 1.1rem 0;
-      display: flex; gap: 0.9rem; align-items: flex-start;
+    .c  { color: var(--dim); font-style: italic; }   /* comment */
+    .k  { color: var(--accent); }                     /* keyword */
+    .s  { color: var(--yellow); }                     /* string  */
+    .p  { color: var(--green); }                      /* path    */
+    .w  { color: var(--red); }                        /* warning */
+
+    /* ── CALLOUT ── */
+    .note, .warn, .flag {
+      border: 1px solid;
+      border-radius: 3px;
+      padding: 0.8rem 1rem;
+      margin: 1rem 0;
       font-size: 13px;
+      display: flex;
+      gap: 0.7rem;
+      align-items: flex-start;
     }
-    .callout-icon { flex-shrink: 0; margin-top: 1px; }
-    .callout.note   { border-color: var(--accent-dim); background: rgba(124,158,248,0.04); }
-    .callout.warn   { border-color: #5a3a1a;           background: rgba(212,168,83,0.05); }
-    .callout.danger { border-color: #5a2020;           background: rgba(224,108,108,0.05); }
 
-    /* ── TIMELINE / STEPS ── */
-    .timeline { margin: 1.5rem 0; border-left: 1px solid var(--border); padding-left: 1.5rem; }
-    .tl-item { position: relative; padding-bottom: 1.4rem; }
-    .tl-item:last-child { padding-bottom: 0; }
-    .tl-dot {
-      position: absolute; left: -1.87rem; top: 4px;
-      width: 10px; height: 10px; border-radius: 50%;
-      background: var(--surface2); border: 1px solid var(--accent-dim);
-    }
-    .tl-label {
-      font-size: 10px; letter-spacing: 0.12em;
-      color: var(--accent); text-transform: uppercase; margin-bottom: 0.25rem;
-    }
-    .tl-body { color: var(--text); }
+    .note { border-color: #2a3d5e; background: rgba(91,141,217,0.04); color: var(--text); }
+    .warn { border-color: #3d3010; background: rgba(184,154,74,0.04); color: var(--text); }
+    .flag { border-color: #1e3d2a; background: rgba(74,158,107,0.06); color: var(--green); font-family: var(--mono); }
 
-    /* ── TOC ── */
-    .toc {
+    .note-icon { flex-shrink: 0; }
+
+    strong { color: var(--hi); font-weight: 500; }
+
+    /* ── STEPS ── */
+    .steps {
+      border-left: 1px solid var(--border);
+      padding-left: 1.2rem;
+      margin: 0.8rem 0 1rem;
+    }
+
+    .step {
+      position: relative;
+      padding-bottom: 1rem;
+    }
+
+    .step:last-child { padding-bottom: 0; }
+
+    .step::before {
+      content: '';
+      position: absolute;
+      left: -1.45rem;
+      top: 6px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 1px solid var(--accent);
+    }
+
+    .step-label {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+
+    /* ── TAKEAWAYS ── */
+    .takeaways {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 1.1rem 1.3rem;
-      margin-bottom: 2.5rem;
+      border-radius: 3px;
+      padding: 1rem 1.2rem;
+      margin-top: 2rem;
     }
-    .toc-label {
-      font-size: 10px; letter-spacing: 0.15em;
-      color: var(--muted); text-transform: uppercase; margin-bottom: 0.6rem;
-    }
-    .toc ul { list-style: none; }
-    .toc li { padding: 2px 0; }
-    .toc a  { color: var(--text); font-size: 12.5px; }
-    .toc a:hover { color: var(--accent); text-decoration: none; }
-    .toc-num { color: var(--muted); margin-right: 0.5rem; }
 
-    /* ── FLAG ── */
-    .flag-box {
-      background: var(--code-bg);
-      border: 1px solid var(--green);
-      border-radius: 6px;
-      padding: 0.9rem 1.2rem;
-      margin: 1.5rem 0;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.95rem;
-      color: var(--green);
-      display: flex; align-items: center; gap: 0.8rem;
+    .takeaways-title {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      color: var(--dim);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
     }
-    .flag-icon { font-size: 1rem; }
 
-    /* ── SUMMARY BOX ── */
-    .summary {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 1.2rem 1.4rem;
-      margin: 2rem 0;
+    .takeaways ul {
+      list-style: none;
+      padding: 0;
     }
-    .summary-title {
-      font-size: 10px; letter-spacing: 0.15em;
-      color: var(--muted); text-transform: uppercase; margin-bottom: 0.8rem;
+
+    .takeaways li {
+      padding: 0.2rem 0;
+      font-size: 12.5px;
+      color: var(--text);
     }
-    .vuln-row {
-      display: flex; gap: 0.6rem; align-items: flex-start;
-      margin-bottom: 0.4rem; font-size: 13px;
-    }
-    .vuln-tag {
-      font-size: 10px; letter-spacing: 0.08em;
-      padding: 1px 7px; border-radius: 2px;
-      background: rgba(224,108,108,0.12); color: var(--red);
-      border: 1px solid rgba(224,108,108,0.25);
-      flex-shrink: 0; margin-top: 2px;
+
+    .takeaways li::before {
+      content: '— ';
+      color: var(--dim);
     }
 
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
-      padding: 1.8rem 2.5rem;
+      padding: 1.5rem 2rem;
       text-align: center;
-      color: var(--muted); font-size: 12px;
+      font-size: 12px;
+      color: var(--dim);
     }
-    footer a { color: var(--muted); }
+
+    footer a { color: var(--dim); text-decoration: none; }
     footer a:hover { color: var(--text); }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
+      from { opacity: 0; transform: translateY(10px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    @media (max-width: 600px) {
-      header, .hero, .container { padding-left: 1.2rem; padding-right: 1.2rem; }
-      h1 { font-size: 1.7rem; }
+    @media (max-width: 520px) {
+      header, main { padding-left: 1.2rem; padding-right: 1.2rem; }
+      h1 { font-size: 1.4rem; }
     }
   </style>
 </head>
 <body>
 
 <header>
-  <a href="/" class="logo">s4nch<span>0</span></a>
+  <a href="../" class="logo"><span class="at">~</span>/s4nch0</a>
   <nav>
-    <a href="/">writeups</a>
-    <a href="https://github.com/Zentaiva" target="_blank">github</a>
+    <a href="../">← all writeups</a>
   </nav>
 </header>
 
-<div class="hero">
-  <p class="breadcrumb">CTF Writeups / <span>UMass CTF 2026</span></p>
-  <h1>Brick by Brick</h1>
-  <div class="meta-row">
-    <span class="badge web">WEB</span>
-    <span class="badge easy">EASY</span>
-    <span class="badge pts">100 pts</span>
-    <span class="meta-sep">&middot;</span>
-    <span style="font-size:12px;color:var(--muted)">UMass CTF 2024</span>
-  </div>
-</div>
+<main>
 
-<div class="container">
-
-  <!-- SUMMARY -->
-  <div class="summary">
-    <div class="summary-title">// vulnerabilities exploited</div>
-    <div class="vuln-row"><span class="vuln-tag">INFO DISCLOSURE</span><span>Sensitive paths exposed via <code>robots.txt</code></span></div>
-    <div class="vuln-row"><span class="vuln-tag">LFI</span><span>Unvalidated <code>?file=</code> parameter allowing arbitrary file read</span></div>
-    <div class="vuln-row"><span class="vuln-tag">DEFAULT CREDS</span><span>Admin panel protected by unchanged factory credentials</span></div>
+  <div class="breadcrumb">
+    <a href="../">writeups</a>
+    <span class="sep">/</span>
+    <a href="../#umass-2026">UMass CTF 2026</a>
+    <span class="sep">/</span>
+    Brick by Brick
   </div>
 
-  <!-- TOC -->
-  <div class="toc">
-    <div class="toc-label">// contents</div>
-    <ul>
-      <li><a href="#recon"><span class="toc-num">01</span>Initial Recon — the portal</a></li>
-      <li><a href="#robots"><span class="toc-num">02</span>robots.txt — hidden paths</a></li>
-      <li><a href="#lfi"><span class="toc-num">03</span>LFI via <code>?file=</code> — reading config.php</a></li>
-      <li><a href="#admin"><span class="toc-num">04</span>Admin panel — flag captured</a></li>
-    </ul>
-  </div>
-
-  <!-- STEP 1 -->
-  <h2 id="recon"><span class="step-circle">01</span> Initial Recon</h2>
-
-  <p>
-    The challenge description hints at a hidden admin dashboard on an old portal for <strong>BrickWorks Co.</strong>
-    Navigating to the instance, we're greeted with a generic maintenance page — nothing obviously useful on the surface.
-  </p>
-
-  <pre><code><span class="hl-path">http://brick-by-brick.web.ctf.umasscybersec.org:32769/</span>
-<span class="hl-cmt">→ "Internal systems are currently undergoing maintenance."</span></code></pre>
-
-  <p>No forms, no links, no JS calls to interesting endpoints. Time to look at what the server is deliberately hiding.</p>
-
-  <!-- STEP 2 -->
-  <h2 id="robots"><span class="step-circle">02</span> robots.txt — Exposed Internal Paths</h2>
-
-  <p>
-    The first thing to check on any web challenge is <code>/robots.txt</code>. 
-    It's meant to instruct crawlers which paths to <em>skip</em> — which conveniently tells us exactly where to look.
-  </p>
-
-  <pre><span class="lang-label">robots.txt</span><code><span class="hl-key">User-agent:</span> *
-<span class="hl-warn">Disallow:</span> <span class="hl-path">/internal-docs/assembly-guide.txt</span>
-<span class="hl-warn">Disallow:</span> <span class="hl-path">/internal-docs/it-onboarding.txt</span>
-<span class="hl-warn">Disallow:</span> <span class="hl-path">/internal-docs/q3-report.txt</span>
-
-<span class="hl-cmt"># NOTE: Maintenance in progress.</span>
-<span class="hl-cmt"># Unauthorized crawling of /internal-docs/ is prohibited.</span></code></pre>
-
-  <p>
-    Three files listed. The <code>assembly-guide.txt</code> and <code>q3-report.txt</code> turned out to be dead ends — generic company content with no useful technical details. 
-    The interesting one was <code>it-onboarding.txt</code>.
-  </p>
-
-  <div class="callout note">
-    <span class="callout-icon">💡</span>
-    <div><strong>Tip:</strong> robots.txt is one of the first places to check in web CTF challenges. Developers often add sensitive internal paths there thinking "bots won't access it anyway," but the file is publicly readable by anyone.</div>
-  </div>
-
-  <!-- STEP 3 -->
-  <h2 id="lfi"><span class="step-circle">03</span> LFI via <code>?file=</code></h2>
-
-  <p>The IT onboarding document leaked two critical pieces of information:</p>
-
-  <div class="timeline">
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-label">Finding 1 — File Parameter</div>
-      <div class="tl-body">The internal document portal accepts a <code>?file=</code> GET parameter to serve arbitrary files. No mention of any access control or path validation.</div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-label">Finding 2 — Config Location</div>
-      <div class="tl-body">Credentials for the admin dashboard are stored in <code>config.php</code> located in the web root.</div>
+  <div class="hero">
+    <h1>Brick by Brick</h1>
+    <div class="meta">
+      <span class="tag tag-web">web</span>
+      <span class="tag tag-easy">easy</span>
+      <span class="tag tag-pts">100 pts</span>
+      <span class="meta-sep">·</span>
+      <span class="ctf-name">UMass CTF 2026</span>
     </div>
   </div>
 
-  <p>Combining both findings — we can request the config file directly through the exposed parameter:</p>
+  <hr>
 
-  <pre><span class="lang-label">url</span><code><span class="hl-path">http://brick-by-brick.web.ctf.umasscybersec.org:32769/?file=config.php</span></code></pre>
+  <div class="content">
 
-  <p>The server responds with the raw PHP source — completely unauthenticated:</p>
+    <p>
+      The challenge description says there's a hidden admin dashboard on an old portal for
+      <strong>BrickWorks Co.</strong> and asks us to find it and get the flag.
+      The instance is running at <code>brick-by-brick.web.ctf.umasscybersec.org:32769</code>.
+    </p>
 
-  <pre><span class="lang-label">config.php</span><code><span class="hl-cmt">// BrickWorks Co. — Application Configuration</span>
-<span class="hl-cmt">// WARNING: Do not expose this file publicly!</span>
+    <!-- STEP 1 -->
+    <h2><span class="num">01</span> Initial Recon</h2>
 
-<span class="hl-cmt">// The admin dashboard is located at /dashboard-admin.php</span>
+    <p>
+      Visiting the root page shows a generic maintenance message — nothing interactive.
+      No forms, no JS requests to interesting endpoints, nothing in the page source worth noting.
+    </p>
 
-<span class="hl-cmt">// Database</span>
-<span class="hl-key">define</span>(<span class="hl-val">'DB_HOST'</span>, <span class="hl-val">'localhost'</span>);
-<span class="hl-key">define</span>(<span class="hl-val">'DB_NAME'</span>, <span class="hl-val">'brickworks'</span>);
-<span class="hl-key">define</span>(<span class="hl-val">'DB_USER'</span>, <span class="hl-val">'brickworks_app'</span>);
-<span class="hl-key">define</span>(<span class="hl-val">'DB_PASS'</span>, <span class="hl-val">'BrickW0rks_db_2024!'</span>);
+    <pre><code><span class="p">http://brick-by-brick.web.ctf.umasscybersec.org:32769/</span>
+<span class="c">→ "Internal systems are currently undergoing maintenance."</span></code></pre>
 
-<span class="hl-cmt">// WARNING: SYSTEM IS CURRENTLY USING DEFAULT FACTORY CREDENTIALS.</span>
-<span class="hl-cmt">// TODO: Change 'administrator' account from default password.</span>
+    <p>First obvious thing to check on any web challenge — <code>robots.txt</code>.</p>
 
-<span class="hl-key">define</span>(<span class="hl-val">'ADMIN_USER'</span>, <span class="hl-val">'administrator'</span>);
-<span class="hl-key">define</span>(<span class="hl-val">'ADMIN_PASS'</span>, <span class="hl-val">'[deleted it for safety reasons - Tom]'</span>);</code></pre>
+    <!-- STEP 2 -->
+    <h2><span class="num">02</span> robots.txt — Hidden Paths</h2>
 
-  <div class="callout warn">
-    <span class="callout-icon">⚠️</span>
-    <div>The config clearly states the system is running <strong>default factory credentials</strong> and someone named Tom removed the password from the comment but forgot to actually change it. Classic.</div>
-  </div>
+    <pre><code><span class="k">User-agent:</span> *
+<span class="w">Disallow:</span> <span class="p">/internal-docs/assembly-guide.txt</span>
+<span class="w">Disallow:</span> <span class="p">/internal-docs/it-onboarding.txt</span>
+<span class="w">Disallow:</span> <span class="p">/internal-docs/q3-report.txt</span>
 
-  <p>
-    So we have the username: <code>administrator</code>. The password is blanked out in the comment, 
-    but the file itself warns that <em>default credentials are still in use</em>. 
-    A reasonable guess is that the default password is something generic — trying <code>administrator</code> as both username and password worked immediately.
-  </p>
+<span class="c"># NOTE: Maintenance in progress.</span>
+<span class="c"># Unauthorized crawling of /internal-docs/ is prohibited.</span></code></pre>
 
-  <!-- STEP 4 -->
-  <h2 id="admin"><span class="step-circle">04</span> Admin Panel — Flag Captured</h2>
+    <p>
+      Three internal documents listed. <code>assembly-guide.txt</code> and
+      <code>q3-report.txt</code> were dead ends — generic company content.
+      The useful one was <code>it-onboarding.txt</code>.
+    </p>
 
-  <p>
-    We now know the admin panel is at <code>/dashboard-admin.php</code>. 
-    Navigating there and logging in with the default credentials gives us full access to the BrickWorks control panel — and the flag.
-  </p>
-
-  <pre><span class="lang-label">url</span><code><span class="hl-path">http://brick-by-brick.web.ctf.umasscybersec.org:32769/dashboard-admin.php</span>
-<span class="hl-cmt">→ Login: administrator / administrator</span>
-<span class="hl-cmt">→ CHALLENGE COMPLETE — FLAG CAPTURED</span></code></pre>
-
-  <div class="flag-box">
-    <span class="flag-icon">🚩</span>
-    UMASS{4lw4ys_ch4ng3_d3f4ult_cr3d3nt14ls}
-  </div>
-
-  <hr class="divider">
-
-  <div class="callout note">
-    <span class="callout-icon">📌</span>
-    <div>
-      <strong>Key takeaways:</strong><br>
-      Robots.txt is not a security mechanism — it's a roadmap. Never store credentials in source files served by the web root. 
-      The <code>?file=</code> parameter had zero path validation, making it a trivial LFI. 
-      And of course — always change default credentials before deploying anything to production.
+    <div class="note">
+      <span class="note-icon">ℹ</span>
+      <span><code>robots.txt</code> is not a security mechanism — it's a public roadmap.
+      Developers often list sensitive paths there assuming bots won't visit them, but anyone can read the file.</span>
     </div>
+
+    <!-- STEP 3 -->
+    <h2><span class="num">03</span> LFI via <code>?file=</code> Parameter</h2>
+
+    <p>The IT onboarding document revealed two key things:</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-label">Finding 1 — File Parameter</div>
+        <p>The internal portal accepts a <code>?file=</code> GET parameter to serve files.
+        No mention of validation or access control.</p>
+      </div>
+      <div class="step">
+        <div class="step-label">Finding 2 — Config Location</div>
+        <p>Admin credentials are stored in <code>config.php</code> in the web root.
+        The IT doc explicitly tells staff to look there.</p>
+      </div>
+    </div>
+
+    <p>Combining both — we can read <code>config.php</code> directly through the exposed parameter:</p>
+
+    <pre><code><span class="p">http://brick-by-brick.web.ctf.umasscybersec.org:32769/?file=config.php</span></code></pre>
+
+    <p>The server responds with the raw PHP source, no authentication required:</p>
+
+    <pre><code><span class="c">// BrickWorks Co. — Application Configuration</span>
+<span class="c">// WARNING: Do not expose this file publicly!</span>
+
+<span class="c">// The admin dashboard is located at /dashboard-admin.php</span>
+
+<span class="w">// WARNING: SYSTEM IS CURRENTLY USING DEFAULT FACTORY CREDENTIALS.</span>
+<span class="w">// TODO: Change 'administrator' account from default password.</span>
+
+<span class="k">define</span>(<span class="s">'ADMIN_USER'</span>, <span class="s">'administrator'</span>);
+<span class="k">define</span>(<span class="s">'ADMIN_PASS'</span>, <span class="s">'[deleted it for safety reasons - Tom]'</span>);</code></pre>
+
+    <div class="warn">
+      <span class="note-icon">⚠</span>
+      <span>The config warns that <strong>default factory credentials are still in use</strong>.
+      Tom removed the password from the comment but never actually changed it.
+      The default password turns out to be <code>administrator</code>.</span>
+    </div>
+
+    <!-- STEP 4 -->
+    <h2><span class="num">04</span> Admin Panel</h2>
+
+    <p>
+      The config also gives us the admin panel path: <code>/dashboard-admin.php</code>.
+      Logging in with <code>administrator</code> / <code>administrator</code> works immediately.
+    </p>
+
+    <pre><code><span class="p">http://brick-by-brick.web.ctf.umasscybersec.org:32769/dashboard-admin.php</span>
+<span class="c">credentials: administrator / administrator</span>
+<span class="c">→ CHALLENGE COMPLETE — FLAG CAPTURED</span></code></pre>
+
+    <div class="flag">
+      <span>🚩</span>
+      <span>UMASS{4lw4ys_ch4ng3_d3f4ult_cr3d3nt14ls}</span>
+    </div>
+
+    <hr>
+
+    <div class="takeaways">
+      <div class="takeaways-title">// takeaways</div>
+      <ul>
+        <li><code>robots.txt</code> is public — never list sensitive paths there</li>
+        <li>File inclusion parameters need strict allowlist validation</li>
+        <li>Config files with credentials must never be in the web root</li>
+        <li>Always change default credentials before deploying to production</li>
+      </ul>
+    </div>
+
   </div>
 
-</div>
+</main>
 
 <footer>
-  <p>s4nch0 &mdash; CTF writeups &nbsp;·&nbsp; <a href="https://github.com/Zentaiva" target="_blank">github.com/Zentaiva</a></p>
+  <a href="https://github.com/Zentaiva/CTF-Writeups" target="_blank">github.com/Zentaiva/CTF-Writeups</a>
 </footer>
 
 </body>
